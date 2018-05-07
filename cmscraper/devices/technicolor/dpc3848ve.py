@@ -18,6 +18,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+# from __future__ import absolute_import
 from cmscraper.scraper import Scraper, Statistics, ChannelStatistics
 from bs4 import BeautifulSoup
 
@@ -25,7 +26,7 @@ class DPC384ve(Scraper):
     def __init__(self):
         self.url = "http://192.168.0.1/Docsis_system.php"
 
-    def _parse_web_page(self, page):
+    def parse_web_page(self, page):
         soup = BeautifulSoup(page.content, 'html.parser')
         stats = Statistics()
         sum_pwr = list()

@@ -18,7 +18,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from abc import ABCMeta, abstractmethod
 import requests
 import csv
 import time
@@ -58,7 +57,6 @@ class ChannelStatistics(object):
         self.uncorrectables = None
 
 class Scraper():
-    __metaclass__ = ABCMeta
     DEFAULT_TIMEOUT=10
 
     def __init__(self):
@@ -67,17 +65,10 @@ class Scraper():
         self.timeout = self.DEFAULT_TIMEOUT
         self.stats = None
 
-    @abstractmethod
-    def _parse_web_page(self, page):
+    def parse_web_page(self, page):
         pass
 
-    def parse_statistics_from_modem(self):
-        page = self._get_modem_status_page()
-        stats = self._parse_web_page(page)
-        self._generate_csv_files(stats)
-    
-    
-    def _get_modem_status_page(self):
+    def get_modem_status_page(self):
         try:
             page = requests.get(self.url, timeout=self.DEFAULT_TIMEOUT)
         except Exception as e:
@@ -91,7 +82,7 @@ class Scraper():
         return page
 
 
-    def _generate_csv_files(self, stats):
+    def generate_csv_files(self, stats):
         timestamp = int(time.time())
         ds = stats.downstream_channels_stats
         for ch in ds:
