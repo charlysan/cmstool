@@ -21,7 +21,8 @@
 import requests
 import csv
 import time
-
+import os
+import argparse 
 
 class Statistics(object):
     def __init__(self):
@@ -43,6 +44,25 @@ class Statistics(object):
             values.append(self.downstream_channels_stats[ch].snr)
         
         return self.mean(values)
+    
+    def persist_in_csv_format(self, output_path=None):
+        timestamp = int(time.time())
+        ds = self.downstream_channels_stats
+        path = './' if output_path is None else output_path + '/'
+        if not os.path.exists(os.path.dirname(path)):
+            try:
+                os.makedirs(os.path.dirname(path))
+            except:
+                raise
+
+        for ch in ds:
+            with open(path + str(ch) + '.csv', 'a') as csv_file:
+                writer = csv.writer(csv_file)
+                writer.writerow([timestamp, ds[ch].power, ds[ch].snr])
+
+        with open('avg.csv', 'a') as csv_file:
+            writer = csv.writer(csv_file)
+            writer.writerow([timestamp, "{:.2f}".format(self.calculatePowerMean()), "{:.2f}".format(self.calculateSNRMean())])
 
 
 class ChannelStatistics(object):
@@ -57,12 +77,12 @@ class ChannelStatistics(object):
         self.uncorrectables = None
 
 class Scraper():
-    DEFAULT_TIMEOUT=10
+    DEFAULT_TIMEOUT = 10
 
-    def __init__(self):
+    def __init__(self, http_client_timeout=DEFAULT_TIMEOUT):
+        self.http_client_timeout = http_client_timeout
         self.device_name = None
         self.url = None
-        self.timeout = self.DEFAULT_TIMEOUT
         self.stats = None
 
     def parse_web_page(self, page):
@@ -70,7 +90,7 @@ class Scraper():
 
     def get_modem_status_page(self):
         try:
-            page = requests.get(self.url, timeout=self.DEFAULT_TIMEOUT)
+            page = requests.get(self.url, timeout=self.http_client_timeout)
         except Exception as e:
             print(str(e))
             exit(-1)
@@ -80,17 +100,3 @@ class Scraper():
             exit(-1)
 
         return page
-
-
-    def generate_csv_files(self, stats):
-        timestamp = int(time.time())
-        ds = stats.downstream_channels_stats
-        for ch in ds:
-            with open(str(ch) + '.csv', 'a') as csv_file:
-                writer = csv.writer(csv_file)
-                writer.writerow([timestamp, ds[ch].power, ds[ch].snr])
-
-        with open('avg.csv', 'a') as csv_file:
-            writer = csv.writer(csv_file)
-            writer.writerow([timestamp, "{:.2f}".format(stats.calculatePowerMean()), "{:.2f}".format(stats.calculateSNRMean())])
-

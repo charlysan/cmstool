@@ -21,10 +21,15 @@
 # from __future__ import absolute_import
 from cmscraper.scraper import Scraper, Statistics, ChannelStatistics
 from bs4 import BeautifulSoup
+from os import getenv
 
 class DPC384ve(Scraper):
-    def __init__(self):
-        self.url = "http://192.168.0.1/Docsis_system.php"
+    DEFAULT_TIMEOUT = 10
+
+    def __init__(self, host=None, http_client_timeout=DEFAULT_TIMEOUT):
+        Scraper.__init__(self, http_client_timeout=http_client_timeout)
+        hostname = '192.168.0.1' if host is None else host
+        self.url = "http://" + hostname + "/Docsis_system.php"
 
     def parse_web_page(self, page):
         soup = BeautifulSoup(page.content, 'html.parser')

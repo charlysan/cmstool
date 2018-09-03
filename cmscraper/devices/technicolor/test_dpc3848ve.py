@@ -5,7 +5,7 @@ from cmscraper.scraper import Statistics
 import os
 
 
-def mocked_requests_get(*args, **kwargs):
+def mocked_requests_get_ok(*args, **kwargs):
     class MockResponse:
         def __init__(self, content, status_code):
             self.content = content
@@ -20,8 +20,8 @@ class TestDPC348ve(unittest.TestCase):
     def setUp(self):
         pass
     
-    @mock.patch('requests.get', side_effect=mocked_requests_get)
-    def test_parse_web_page(self, mock_get):
+    @mock.patch('requests.get', side_effect=mocked_requests_get_ok)
+    def test_parse_web_page_ok(self, mock_get):
         scraper = DPC384ve()
         page = scraper.get_modem_status_page()
         stats = scraper.parse_web_page(page)
@@ -34,7 +34,6 @@ class TestDPC348ve(unittest.TestCase):
         for ch in range(1, 25):
             self.assertEquals(pwr_expected_list[ch-1], stats.downstream_channels_stats[ch].power)
             self.assertEquals(snr_expected_list[ch-1], stats.downstream_channels_stats[ch].snr)
-
-
+    
 if __name__ == '__main__':
     unittest.main()
