@@ -22,6 +22,7 @@ from cmscraper.scraper import Scraper, Statistics, ChannelStatistics
 from bs4 import BeautifulSoup
 from os import getenv
 
+
 class DPC384ve(Scraper):
     DEFAULT_TIMEOUT = 10
 
@@ -36,23 +37,25 @@ class DPC384ve(Scraper):
         sum_pwr = list()
         sum_snr = list()
 
-        tbody_data = soup.find('table', attrs={'class':'bm_docsisWanDSChannel'}).find('tbody')
+        tbody_data = soup.find(
+            'table', attrs={
+                'class': 'bm_docsisWanDSChannel'}).find('tbody')
 
         for element in tbody_data.find_all('tr'):
             ch_stats = ChannelStatistics()
             ch = element.find('td', attrs={'headers': 'ds_channel'})
             for s in ch.find_all('script'):
-                s.extract() 
+                s.extract()
             ch = int(ch.text)
 
             pwr = element.find('td', attrs={'headers': 'ds_power'})
             for s in pwr.find_all('script'):
-                s.extract() 
+                s.extract()
             pwr = float(pwr.text)
 
             snr = element.find('td', attrs={'headers': 'ds_snr'})
             for s in snr.find_all('script'):
-                s.extract() 
+                s.extract()
             snr = float(snr.text)
 
             sum_pwr.append(pwr)
@@ -65,4 +68,3 @@ class DPC384ve(Scraper):
             stats.downstream_channels_stats[ch] = ch_stats
 
         return stats
-            

@@ -22,7 +22,8 @@ import requests
 import csv
 import time
 import os
-import argparse 
+import argparse
+
 
 class Statistics(object):
     def __init__(self):
@@ -35,16 +36,16 @@ class Statistics(object):
         values = list()
         for ch in self.downstream_channels_stats:
             values.append(self.downstream_channels_stats[ch].power)
-        
+
         return self.mean(values)
 
     def calculateSNRMean(self):
         values = list()
         for ch in self.downstream_channels_stats:
             values.append(self.downstream_channels_stats[ch].snr)
-        
+
         return self.mean(values)
-    
+
     def persist_in_csv_format(self, output_path=None):
         timestamp = int(time.time())
         ds = self.downstream_channels_stats
@@ -52,7 +53,7 @@ class Statistics(object):
         if not os.path.exists(os.path.dirname(path)):
             try:
                 os.makedirs(os.path.dirname(path))
-            except:
+            except BaseException:
                 raise
 
         for ch in ds:
@@ -62,7 +63,9 @@ class Statistics(object):
 
         with open(path + 'avg.csv', 'a') as csv_file:
             writer = csv.writer(csv_file)
-            writer.writerow([timestamp, "{:.2f}".format(self.calculatePowerMean()), "{:.2f}".format(self.calculateSNRMean())])
+            writer.writerow([timestamp,
+                             "{:.2f}".format(self.calculatePowerMean()),
+                             "{:.2f}".format(self.calculateSNRMean())])
 
 
 class ChannelStatistics(object):
@@ -75,6 +78,7 @@ class ChannelStatistics(object):
         self.ber = None
         self.correctables = None
         self.uncorrectables = None
+
 
 class Scraper():
     DEFAULT_TIMEOUT = 10
