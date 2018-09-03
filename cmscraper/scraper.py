@@ -60,7 +60,7 @@ class Statistics(object):
                 writer = csv.writer(csv_file)
                 writer.writerow([timestamp, ds[ch].power, ds[ch].snr])
 
-        with open('avg.csv', 'a') as csv_file:
+        with open(path + 'avg.csv', 'a') as csv_file:
             writer = csv.writer(csv_file)
             writer.writerow([timestamp, "{:.2f}".format(self.calculatePowerMean()), "{:.2f}".format(self.calculateSNRMean())])
 
