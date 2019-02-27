@@ -23,6 +23,8 @@ import csv
 import time
 import os
 import argparse
+import pymongo as mongo
+import datetime
 
 
 class Statistics(object):
@@ -45,8 +47,33 @@ class Statistics(object):
             values.append(self.downstream_channels_stats[ch].snr)
 
         return self.mean(values)
+    
+    def persistInMongodb(self, host='127.0.0.1', port=27017):
+        client = mongo.MongoClient(host, port)
+        db = client['cmsraper']
+        
+        post_data = {'download': {}}
+        ch_data = dict()
 
-    def persist_in_csv_format(self, output_path=None):
+        ds = self.downstream_channels_stats
+
+        # post_data['timestamp'] = int(time.time())
+        post_data['timestamp'] = datetime.datetime.utcnow()
+
+        for ch in ds:
+            ch_data = dict()
+            ch_data['power'] = ds[ch].power
+            ch_data['snr'] = ds[ch].snr
+            post_data['download'][str(ch)] = ch_data
+
+        ch_data = dict()
+        ch_data['power'] = self.calculatePowerMean()
+        ch_data['snr'] = self.calculateSNRMean()
+        post_data['download']["0"] =  ch_data
+        db.stats.insert_one(post_data)
+
+
+    def persistInCSV(self, output_path=None):
         timestamp = int(time.time())
         ds = self.downstream_channels_stats
         path = './' if output_path is None else output_path + '/'

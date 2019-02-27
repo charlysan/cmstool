@@ -113,12 +113,13 @@ def plot(channels=[0], path='./data', datetime_start=None,
     plt.rcParams.update({'figure.max_open_warning': 0})
 
     print('')
+    
     for c in channels:
         f = path + '/' + str(c) + '.csv'
         exists = os.path.isfile(f)
         if not exists:
             continue
-
+        
         data = np.genfromtxt(f, delimiter=',')
 
         # Crop input based on start/end datetime
