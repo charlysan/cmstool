@@ -1,17 +1,6 @@
-FROM alpine
+FROM python:3.8-slim
+RUN pip install --no-cache-dir matplotlib==3.3.2 pandas
 
-RUN apk add --no-cache libpng freetype libstdc++ python py-pip
-RUN apk add --no-cache --virtual .build-deps \
-	    gcc \
-	    build-base \
-	    python-dev \
-	    libpng-dev \
-	    musl-dev \
-	    freetype-dev
-RUN ln -s /usr/include/locale.h /usr/include/xlocale.h \
-	&& pip install numpy \
-	&& pip install matplotlib \
-	&& apk del .build-deps
 WORKDIR /opt/cmstats
 ADD . /opt/cmstats
 RUN pip install -r requirements.txt

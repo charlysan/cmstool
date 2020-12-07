@@ -21,9 +21,9 @@
 import requests
 import csv
 import time
+import numbers
 import os
 import argparse
-import pymongo as mongo
 import datetime
 
 
@@ -48,30 +48,6 @@ class Statistics(object):
 
         return self.mean(values)
     
-    def persistInMongodb(self, host='127.0.0.1', port=27017):
-        client = mongo.MongoClient(host, port)
-        db = client['cmsraper']
-        
-        post_data = {'download': {}}
-        ch_data = dict()
-
-        ds = self.downstream_channels_stats
-
-        # post_data['timestamp'] = int(time.time())
-        post_data['timestamp'] = datetime.datetime.utcnow()
-
-        for ch in ds:
-            ch_data = dict()
-            ch_data['power'] = ds[ch].power
-            ch_data['snr'] = ds[ch].snr
-            post_data['download'][str(ch)] = ch_data
-
-        ch_data = dict()
-        ch_data['power'] = self.calculatePowerMean()
-        ch_data['snr'] = self.calculateSNRMean()
-        post_data['download']["0"] =  ch_data
-        db.stats.insert_one(post_data)
-
 
     def persistInCSV(self, output_path=None):
         timestamp = int(time.time())
@@ -88,7 +64,7 @@ class Statistics(object):
                 writer = csv.writer(csv_file)
                 writer.writerow([timestamp, ds[ch].power, ds[ch].snr])
 
-        with open(path + 'avg.csv', 'a') as csv_file:
+        with open(path + '0.csv', 'a') as csv_file:
             writer = csv.writer(csv_file)
             writer.writerow([timestamp,
                              "{:.2f}".format(self.calculatePowerMean()),

@@ -52,9 +52,7 @@ def main():
 
     page = scraper.get_modem_status_page()
     stats = scraper.parse_web_page(page)
-    # stats.persistInCSV(output_path=args.OUTPUT_PATH)
-    stats.persistInMongodb()
-
+    stats.persistInCSV(output_path=args.OUTPUT_PATH)
 
 
 if __name__ == "__main__":
