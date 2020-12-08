@@ -1,4 +1,4 @@
-# DOCSIS Cable Modem 4G Interference
+# DOCSIS Cable Modem And 4G Interference
 
 The purpose of this document is to show how to diagnose possible interference to DOCSIS cable modems by collecting SNR samples from modem's web UI interface status page, and analyze them using tools like `python` and `matplotlib`. 
 
@@ -31,7 +31,7 @@ till '2018-05-15 14:00:00'
 
 ![4g_stats](./../images/4g_stats.png)
 
-From the above, average values don't look that bad but standard deviation for channel 12 and 13 was **very high**. This could mean that those two channels were affected by some interference. The plots for a channel not affected by  interference looked like this:
+From the above, average values don't look that bad but standard deviation for channel 12 and 13 was **very high**. This could mean that those two channels were affected by some source of interference. The plots for a channel not affected by interference looked like this:
 
 ![4g_ch9](./../images/4g_ch9.png)
 
@@ -56,7 +56,7 @@ I then did a quick research and found out that in my country the following frequ
 - 723-738 MHz & 778-793 MHz (Comp. C)
 
 
-`Comp. B` 4G Antenna might be a possible culprit. Furthermore, for `256 QAM` SNR values of 33 dB or more is [recommended](https://pickmymodem.com/signal-levels-docsis-3-03-1-cable-modem/). 
+`Comp. B` 4G Antenna might be the culprit. Furthermore, for `256 QAM` SNR values of 33 dB or more is [recommended](https://pickmymodem.com/signal-levels-docsis-3-03-1-cable-modem/). 
 So, I went to my building's rooftop to have a look and I could clearly see there was a 4G antenna in another building next to mine.
 
 With this evidence I called my internet provider one more time. I explained them the problem, but they didn't know what to do about it. Finally, with the help of a friend, I managed to get a technician to check the building's main splitter box. It turned out that the splitter case shield door was not properly closed, there was a gap (around 1 cm. long) that allowed 4G signal to go through and affect some splitters. After he properly sealed the box, the problem was gone. This plot shows the exact moment before and after the fix:

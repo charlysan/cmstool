@@ -187,12 +187,12 @@ charlysan/cmstats \
 
 ## Real case study (4G interference)
 
-Please refer to [DOCSIS 4G interference case study](./docs/Interference4g.md)
+Please refer to [DOCSIS Cable Modem & 4G Interference document](./docs/Interference4g.md)
 
 ## How to contribute
 
 The scraper tool could easily support many other devices. If you want to support a different device just create a Pull Request, 
-implement [Scraper class](./cmscraper/scraper.py) and add your files under the [devices](./cmscraper/devices) folder. 
+extend [Scraper class](./cmscraper/scraper.py), update `cmscraper_cli` and add your files under [devices](./cmscraper/devices) folder. 
 Don't forget to add a Unit Test like the [included one](cmscraper/devices/technicolor/test_dpc3848ve.py)
 
 ## Final notes
