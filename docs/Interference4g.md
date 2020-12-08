@@ -42,7 +42,7 @@ However, channels 12 and 13 were very messed up:
 ![4g_ch13](./../images/4g_ch13.png)
 
 
-There was no doubt now that some source of interference was affecting. At that moment I wanted to know the frequency and modulation for those channels, however the web ui interface does not provide that information. So, I reverse engineered  the firmware (beyond the scope of this this document) and gained access to CISCO cli console. This is what I got:
+There was no doubt now that some source of interference was affecting the cable modem. At that moment I wanted to know the frequency and modulation for those channels, however the web ui interface does not provide that information. So, I reverse engineered  the firmware (beyond the scope of this this document) and gained access to CISCO cli console. This is what I got:
 
 ![4g_cisco_ch12](./../images/4g_cisco_ch12.png)
 

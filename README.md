@@ -106,7 +106,7 @@ charlysan/cmstats \
 ```
 
 The above will execute cmstats cli tool and map `./stats` folder to `/opt/cmstats/data` on your container 
-(the default path containing the your `.csv` files) and parse channel range through 0 to 24. 
+(the default path containing your `.csv` files) and parse channel range through 0 to 24. 
 
 **Note**: channel `0` is the average value of the whole set of channels.
 
