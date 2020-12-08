@@ -42,7 +42,7 @@ For this beta version just only one:
 
 ## Installation
 
-`cmscraper` can be installed using pip:
+`cmscraper` can be installed using [pip](https://pypi.org/project/cmstool/):
 ```
 pip install cmstool
 ```
