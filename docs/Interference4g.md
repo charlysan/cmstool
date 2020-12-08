@@ -1,4 +1,4 @@
-# DOCSIS Cable Modem And 4G Interference
+# DOCSIS cable modem and 4G interference
 
 The purpose of this document is to show how to diagnose possible interference to DOCSIS cable modems by collecting SNR samples from modem's web UI interface status page, and analyze them using tools like `python` and `matplotlib`. 
 
