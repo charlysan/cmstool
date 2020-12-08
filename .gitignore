@@ -3,4 +3,8 @@
 .DS_Store
 .vscode
 *.csv
+dist/
+data/
+stats*
+build/
 

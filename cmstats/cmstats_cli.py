@@ -91,19 +91,19 @@ def plot(channels=[0], path='./data', datetime_start=None,
          datetime_end=None, ip='0.0.0.0', open_browser=True):
     '''Plot Power/SNR vs time for all the channels specified within channels list'''
 
-    FIG_SIZE_X = os.getenv('FIG_SIZE_X', 12)
-    FIG_SIZE_Y = os.getenv('FIG_SIZE_Y', 7)
-    PLOT_TITLE_FONT_SIZE = os.getenv('PLOT_TITLE_FONT_SIZE', 12)
-    PLOT_POWER_LINE_WIDTH = os.getenv('PLOT_POWER_LINE_WIDTH', 1.2)
+    FIG_SIZE_X = int(os.getenv('FIG_SIZE_X', 12))
+    FIG_SIZE_Y = int(os.getenv('FIG_SIZE_Y', 7))
+    PLOT_TITLE_FONT_SIZE = int(os.getenv('PLOT_TITLE_FONT_SIZE', 12))
+    PLOT_POWER_LINE_WIDTH = int(os.getenv('PLOT_POWER_LINE_WIDTH', 1.2))
     PLOT_POWER_COLOR = os.getenv('PLOT_POWER_COLOR', 'blue')
-    PLOT_SNR_LINE_WIDTH = os.getenv('PLOT_SNR_LINE_WIDTH', 1.2)
+    PLOT_SNR_LINE_WIDTH = int(os.getenv('PLOT_SNR_LINE_WIDTH', 1.2))
     PLOT_SNR_COLOR = os.getenv('PLOT_SNR_COLOR', 'red')
 
-    SNR_MIN_THRESHOLD = os.getenv('SNR_MIN_THRESHOLD', 30) # For limiting SNR y axis plot
-    SNR_MIN_Y_VALUE_1 = os.getenv('SNR_MIN_Y_VALUE_1', 32)
-    SNR_MAX_Y_VALUE_1 = os.getenv('SNR_MAX_Y_VALUE_1', 40)
-    SNR_MIN_Y_VALUE_2 = os.getenv('SNR_MIN_Y_VALUE_2', 5)
-    SNR_MAX_Y_VALUE_2 = os.getenv('SNR_MAX_Y_VALUE_2', 40)
+    SNR_MIN_THRESHOLD = int(os.getenv('SNR_MIN_THRESHOLD', 30)) # For limiting SNR y axis plot
+    SNR_MIN_Y_VALUE_1 = int(os.getenv('SNR_MIN_Y_VALUE_1', 32))
+    SNR_MAX_Y_VALUE_1 = int(os.getenv('SNR_MAX_Y_VALUE_1', 40))
+    SNR_MIN_Y_VALUE_2 = int(os.getenv('SNR_MIN_Y_VALUE_2', 5))
+    SNR_MAX_Y_VALUE_2 = int(os.getenv('SNR_MAX_Y_VALUE_2', 40))
 
     datetime_format = '%Y-%m-%d %H:%M:%S'
 
