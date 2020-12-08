@@ -67,7 +67,7 @@ optional arguments:
 ```
 
 ### Example
-Now, supposing your modem's gateway `is 192.168.0.1`. If you go to the Web UI interface you might see something like this:
+Now, supposing your modem's gateway is `192.168.0.1`. If you go to the Web UI interface you might see something like this:
 
 ![ds](./images/downstream_example.png)
 

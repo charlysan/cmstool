@@ -4,7 +4,7 @@ The purpose of this document is to show how to diagnose possible interference to
 
 ## Introduction
 
-The real purpose of `cmstool` was to try to find out why the downstream signal of my cable modem was suffering from heavy degradation. The problem persisted for many weeks, and my internet provider was not able to find a solution to the problem. 
+The real purpose of [cmstool](./../README.md) was to try to find out why the downstream signal of my cable modem was suffering from heavy degradation. The problem persisted for many weeks, and my internet provider was not able to find a solution to the problem. 
 
 ### Hardware
 
