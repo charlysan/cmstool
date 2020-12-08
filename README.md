@@ -187,7 +187,7 @@ charlysan/cmstats \
 
 ## Real case study (4G interference)
 
-Please refer to [DOCSIS Cable Modem & 4G Interference document](./docs/Interference4g.md)
+Please refer to wiki [DOCSIS cable modem and 4G interference document](https://github.com/charlysan/cmstool/wiki/DOCSIS-cable-modem-and-4G-interference)
 
 ## How to contribute
 
