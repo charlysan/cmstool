@@ -47,7 +47,7 @@ For this beta version just only one:
 pip install cmstool
 ```
 
-`cmstats` can be executed using Docker. You can find the docker image in [dockerhub](https://hub.docker.com/repository/docker/charlysan/cmstats)
+`cmstats` can be executed using Docker. You can find the docker image in [dockerhub](https://hub.docker.com/r/charlysan/cmstats)
 
 ## Usage
 
